@@ -1,6 +1,6 @@
 int adcValues[3];
 float nhietDo[3];
-char chuoi[50];
+char chuoi[100]; // Tăng kích thước mảng chuỗi để chứa JSON dài hơn
 
 void setup() {
   Serial.begin(9600);
@@ -16,8 +16,9 @@ void loop() {
 
   adcValues[2] = analogRead(A2);
   nhietDo[2] = (adcValues[2] * 500.0) / 1023.0;
-  
-  sprintf(chuoi, "%d,%d,%d\n", (int)nhietDo[0], (int)nhietDo[1], (int)nhietDo[2]);
+
+  // Gộp cả 3 kênh thành định dạng JSON
+  sprintf(chuoi, "{\"A0\":%d, \"A1\":%d, \"A2\":%d}\n", (int)nhietDo[0], (int)nhietDo[1], (int)nhietDo[2]);
   Serial.print(chuoi);
   delay(100);
 }
